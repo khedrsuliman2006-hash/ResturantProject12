@@ -215,25 +215,27 @@
             let phone = document.getElementById('clientPhone').value;
             let address = document.getElementById('clientAddress').value;
 
-            let message = `مرحباً، أريد طلب أوردر جديد 🍽:%0A` +
-                `👤 الاسم: ${name}%0A` +
-                `📱 الهاتف: ${phone}%0A` +
-                `📍 العنوان: ${address}%0A%0A` +
-                `🛒 تفاصيل الطلبات:%0A`;
+            // استخدام الرموز القياسية للأسطر الجديدة بشكل صحيح
+            let message = `مرحباً، أريد طلب أوردر جديد 🍽:\n` +
+                `👤 الاسم: ${name}\n` +
+                `📱 الهاتف: ${phone}\n` +
+                `📍 العنوان: ${address}\n\n` +
+                `🛒 تفاصيل الطلبات:\n`;
 
             let total = 0;
             cart.forEach(item => {
                 let itemTotal = item.price * item.qty;
                 total += itemTotal;
                 let noteText = item.note ? ` [ملاحظة: ${item.note}]` : '';
-                message += `- ${item.name}${noteText} (الكمية: ${item.qty}) - ${itemTotal.toLocaleString()} ل.س%0A`;
+                message += `- ${item.name}${noteText} (الكمية: ${item.qty}) - ${itemTotal.toLocaleString()} ل.س\n`;
             });
 
-            message += `%0A💰 المجموع الكلي: ${total.toLocaleString()} ل.س`;
+            message += `\n💰 المجموع الكلي: ${total.toLocaleString()} ل.س`;
 
-            let url = `https://wa.me/${restaurantPhone}?text=${encodeURIComponent(message)}`;
+            let url = `https://wa.me/${restaurantPhone}?text=` + encodeURIComponent(message);
             window.open(url, '_blank');
         }
+        
         function sendWhatsAppReservation(event) {
             event.preventDefault();
             let name = document.getElementById('resName').value;
