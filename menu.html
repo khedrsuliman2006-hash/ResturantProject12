@@ -7,6 +7,78 @@
     <title>مطعم الورد | قائمة الطعام والمشروبات</title>
     <link rel="stylesheet" href="style.css">
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;900&display=swap" rel="stylesheet">
+    <style>
+        /* تنسيق أزرار التحكم بالطلب داخل كروت المنيو */
+        .order-action-box {
+            margin-top: 12px;
+            padding-top: 10px;
+            border-top: 1px dashed #eee;
+            display: flex;
+            gap: 8px;
+            align-items: center;
+        }
+
+        .qty-input {
+            width: 55px;
+            padding: 6px;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            text-align: center;
+            font-family: 'Cairo', sans-serif;
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+        .add-to-cart-btn {
+            flex: 1;
+            background-color: #27ae60;
+            color: white;
+            border: none;
+            padding: 8px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-family: 'Cairo', sans-serif;
+            font-weight: 700;
+            font-size: 13px;
+            transition: background-color 0.2s ease;
+        }
+
+        .add-to-cart-btn:hover {
+            background-color: #219150;
+        }
+
+        /* شريط التنبيه العائم لإكمال الطلب */
+        .cart-floating-bar {
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: #1e272e;
+            color: white;
+            padding: 12px 25px;
+            border-radius: 50px;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.3);
+            display: none;
+            align-items: center;
+            gap: 15px;
+            z-index: 1000;
+            font-family: 'Cairo', sans-serif;
+        }
+
+        .cart-floating-bar a {
+            background-color: #d4af37;
+            color: #1e272e;
+            text-decoration: none;
+            padding: 6px 15px;
+            border-radius: 20px;
+            font-weight: 700;
+            font-size: 13px;
+        }
+
+        .cart-floating-bar a:hover {
+            background-color: #f1c40f;
+        }
+    </style>
 </head>
 
 <body>
@@ -36,6 +108,10 @@
                     <h3>صحن فلافل مقرمش</h3>
                     <p>فلافل ساخنة محضرة بالخلطة الخاصة مع الخضار الطازجة والطحينة.</p>
                     <div class="dish-footer"><span class="price">15,000 ل.س</span><span class="dish-tag">فطور</span></div>
+                    <div class="order-action-box">
+                        <input type="number" value="1" min="1" max="20" class="qty-input" id="qty_falafel">
+                        <button class="add-to-cart-btn" onclick="addToCartFromMenu('صحن فلافل مقرمش', 15000, 'qty_falafel')">إضافة للسلة 🛒</button>
+                    </div>
                 </div>
             </div>
 
@@ -46,6 +122,10 @@
                     <h3>صحن حمص أصلي</h3>
                     <p>حمص ناعم مع طحينة وزيت زيتون بكر وحبات الحمص الصحيحة.</p>
                     <div class="dish-footer"><span class="price">18,000 ل.س</span><span class="dish-tag">مقبلات</span></div>
+                    <div class="order-action-box">
+                        <input type="number" value="1" min="1" max="20" class="qty-input" id="qty_hummus">
+                        <button class="add-to-cart-btn" onclick="addToCartFromMenu('صحن حمص أصلي', 18000, 'qty_hummus')">إضافة للسلة 🛒</button>
+                    </div>
                 </div>
             </div>
 
@@ -56,6 +136,10 @@
                     <h3>فول بالزيت والليمون</h3>
                     <p>فول بلدي متبل بالثوم، الحامض، وزيت الزيتون على الطريقة التقليدية.</p>
                     <div class="dish-footer"><span class="price">16,000 ل.س</span><span class="dish-tag">فطور</span></div>
+                    <div class="order-action-box">
+                        <input type="number" value="1" min="1" max="20" class="qty-input" id="qty_foul">
+                        <button class="add-to-cart-btn" onclick="addToCartFromMenu('فول بالزيت والليمون', 16000, 'qty_foul')">إضافة للسلة 🛒</button>
+                    </div>
                 </div>
             </div>
 
@@ -66,6 +150,10 @@
                     <h3>فتة حمص بالسمنة واللحمة</h3>
                     <p>خبز محمص مع الحمص واللبن الغني والسمنة العربية والمكسرات المحمصة.</p>
                     <div class="dish-footer"><span class="price">28,000 ل.س</span><span class="dish-tag">شرقي</span></div>
+                    <div class="order-action-box">
+                        <input type="number" value="1" min="1" max="20" class="qty-input" id="qty_fatteh">
+                        <button class="add-to-cart-btn" onclick="addToCartFromMenu('فتة حمص بالسمنة واللحمة', 28000, 'qty_fatteh')">إضافة للسلة 🛒</button>
+                    </div>
                 </div>
             </div>
         </div>
@@ -80,6 +168,10 @@
                     <h3>مشاوي كباب لحم غنم</h3>
                     <p>أسياخ كباب لحم بلدي مشوية على جمر الفحم مع البقدونس والبصل المشوي.</p>
                     <div class="dish-footer"><span class="price">75,000 ل.س</span><span class="dish-tag">مشويات</span></div>
+                    <div class="order-action-box">
+                        <input type="number" value="1" min="1" max="20" class="qty-input" id="qty_kebab">
+                        <button class="add-to-cart-btn" onclick="addToCartFromMenu('مشاوي كباب لحم غنم', 75000, 'qty_kebab')">إضافة للسلة 🛒</button>
+                    </div>
                 </div>
             </div>
 
@@ -90,6 +182,10 @@
                     <h3>صاج شاورما عربي ديلوكس</h3>
                     <p>شرائح شاورما دجاج مع الثوم والبطاطا المقرمشة بخبز الصاج المحمص.</p>
                     <div class="dish-footer"><span class="price">30,000 ل.س</span><span class="dish-tag">شاورما</span></div>
+                    <div class="order-action-box">
+                        <input type="number" value="1" min="1" max="20" class="qty-input" id="qty_shawarma">
+                        <button class="add-to-cart-btn" onclick="addToCartFromMenu('صاج شاورما عربي ديلوكس', 30000, 'qty_shawarma')">إضافة للسلة 🛒</button>
+                    </div>
                 </div>
             </div>
 
@@ -100,6 +196,10 @@
                     <h3>مندي دجاج أو لحم</h3>
                     <p>أرز بسمتي مفلفل مع البهارات الشرقية وقطعة لحم أو دجاج مطبوخة بعناية بالفرن.</p>
                     <div class="dish-footer"><span class="price">65,000 ل.س</span><span class="dish-tag">مأكولات شرقية</span></div>
+                    <div class="order-action-box">
+                        <input type="number" value="1" min="1" max="20" class="qty-input" id="qty_mandi">
+                        <button class="add-to-cart-btn" onclick="addToCartFromMenu('مندي دجاج أو لحم', 65000, 'qty_mandi')">إضافة للسلة 🛒</button>
+                    </div>
                 </div>
             </div>
         </div>
@@ -114,6 +214,10 @@
                     <h3>صفيحة باللحمة</h3>
                     <p>أقراص صفيحة بعجينة رقيقة ومقرمشة ومحمّرة باللحمة والبهارات.</p>
                     <div class="dish-footer"><span class="price">20,000 ل.س</span><span class="dish-tag">معجنات</span></div>
+                    <div class="order-action-box">
+                        <input type="number" value="1" min="1" max="20" class="qty-input" id="qty_safiha">
+                        <button class="add-to-cart-btn" onclick="addToCartFromMenu('صفيحة باللحمة', 20000, 'qty_safiha')">إضافة للسلة 🛒</button>
+                    </div>
                 </div>
             </div>
 
@@ -124,6 +228,10 @@
                     <h3>فطائر السلق حامضة</h3>
                     <p>عجينة طرية محشوة بالسلق الطازج، البصل، والسماق الحامض.</p>
                     <div class="dish-footer"><span class="price">15,000 ل.س</span><span class="dish-tag">معجنات</span></div>
+                    <div class="order-action-box">
+                        <input type="number" value="1" min="1" max="20" class="qty-input" id="qty_salq">
+                        <button class="add-to-cart-btn" onclick="addToCartFromMenu('فطائر السلق حامضة', 15000, 'qty_salq')">إضافة للسلة 🛒</button>
+                    </div>
                 </div>
             </div>
 
@@ -134,6 +242,10 @@
                     <h3>مناقيش زعتر</h3>
                     <p>مناقيش بلدية بزيت الزيتون والزعتر الحلبي.</p>
                     <div class="dish-footer"><span class="price">12,000 ل.س</span><span class="dish-tag">فطور ومعجنات</span></div>
+                    <div class="order-action-box">
+                        <input type="number" value="1" min="1" max="20" class="qty-input" id="qty_zaatar">
+                        <button class="add-to-cart-btn" onclick="addToCartFromMenu('مناقيش زعتر', 12000, 'qty_zaatar')">إضافة للسلة 🛒</button>
+                    </div>
                 </div>
             </div>
 
@@ -144,6 +256,10 @@
                     <h3>فطائر محمرة بالدبس </h3>
                     <p>محمرة سورية على أصولها بطعمها الحار والحلو .</p>
                     <div class="dish-footer"><span class="price">18,000 ل.س</span><span class="dish-tag">معجنات</span></div>
+                    <div class="order-action-box">
+                        <input type="number" value="1" min="1" max="20" class="qty-input" id="qty_muhammara">
+                        <button class="add-to-cart-btn" onclick="addToCartFromMenu('فطائر محمرة بالدبس', 18000, 'qty_muhammara')">إضافة للسلة 🛒</button>
+                    </div>
                 </div>
             </div>
         </div>
@@ -158,6 +274,10 @@
                     <h3>لبن عيران طازج</h3>
                     <p>شراب اللبن الرايب البارد.</p>
                     <div class="dish-footer"><span class="price">7,000 ل.س</span><span class="dish-tag">مشروبات</span></div>
+                    <div class="order-action-box">
+                        <input type="number" value="1" min="1" max="20" class="qty-input" id="qty_ayran">
+                        <button class="add-to-cart-btn" onclick="addToCartFromMenu('لبن عيران طازج', 7000, 'qty_ayran')">إضافة للسلة 🛒</button>
+                    </div>
                 </div>
             </div>
 
@@ -168,6 +288,10 @@
                     <h3>عصير ليمون نعناع طبيعي</h3>
                     <p>عصير ليمون طازج ومنعش مع أوراق النعناع الأخضر وشرائح الليمون.</p>
                     <div class="dish-footer"><span class="price">10,000 ل.س</span><span class="dish-tag">عصائر</span></div>
+                    <div class="order-action-box">
+                        <input type="number" value="1" min="1" max="20" class="qty-input" id="qty_lemon">
+                        <button class="add-to-cart-btn" onclick="addToCartFromMenu('عصير ليمون نعناع طبيعي', 10000, 'qty_lemon')">إضافة للسلة 🛒</button>
+                    </div>
                 </div>
             </div>
 
@@ -178,16 +302,58 @@
                     <h3>شاي أحمر جمر </h3>
                     <p>شاي ملقم على الجمر على الأصول .</p>
                     <div class="dish-footer"><span class="price">5,000 ل.س</span><span class="dish-tag">ساخن</span></div>
+                    <div class="order-action-box">
+                        <input type="number" value="1" min="1" max="20" class="qty-input" id="qty_tea">
+                        <button class="add-to-cart-btn" onclick="addToCartFromMenu('شاي أحمر جمر', 5000, 'qty_tea')">إضافة للسلة 🛒</button>
+                    </div>
                 </div>
             </div>
         </div>
 
     </div>
 
+    <!-- شريط عائم يظهر للزبون لتسهيل الانتقال للسلة -->
+    <div class="cart-floating-bar" id="cartFloatingBar">
+        <span>🛒 تم إضافة أصناف للسلة!</span>
+        <a href="order.html">الانتقال للسلة وإكمال الطلب 🚀</a>
+    </div>
+
     <footer>
         <p>جميع الحقوق محفوظة © 2026 | مطعم الورد للمأكولات والمشروبات</p>
     </footer>
 
+    <!-- سكربت حفظ الأصناف بالسلة وتحديث الذاكرة -->
+    <script>
+        function addToCartFromMenu(itemName, itemPrice, qtyId) {
+            let qtyInput = document.getElementById(qtyId);
+            let qty = parseInt(qtyInput.value) || 1;
+
+            // جلب السلة الحالية من ذاكرة المتصفح
+            let cart = JSON.parse(localStorage.getItem('restaurantCart')) || [];
+
+            let existingItem = cart.find(i => i.name === itemName);
+            if (existingItem) {
+                existingItem.qty += qty;
+            } else {
+                cart.push({ name: itemName, price: itemPrice, qty: qty, note: '' });
+            }
+
+            // حفظ السلة المحدثة
+            localStorage.setItem('restaurantCart', JSON.stringify(cart));
+
+            // إعادة تعيين الكمية وإظهار الشريط العائم
+            qtyInput.value = 1;
+            document.getElementById('cartFloatingBar').style.display = 'flex';
+        }
+
+        // إبقاء الشريط العائم مظهراً إذا كانت السلة تحتوي أصناف مسبقاً
+        window.onload = function() {
+            let cart = JSON.parse(localStorage.getItem('restaurantCart')) || [];
+            if (cart.length > 0) {
+                document.getElementById('cartFloatingBar').style.display = 'flex';
+            }
+        };
+    </script>
 </body>
 
 </html>
